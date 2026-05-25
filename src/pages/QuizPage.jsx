@@ -63,6 +63,7 @@ const QuizPage = ({ onFinish, level = 1 }) => {
       multiple: q.multiple,
       answer: q.answer,
       resolvedCorrectly: q.resolvedCorrectly,
+      wrongAttempts: q.wrongAttempts,
     }));
 
     const firstCorrect = firstAttemptCorrectRef.current;
@@ -200,8 +201,8 @@ const QuizPage = ({ onFinish, level = 1 }) => {
   // ── render ────────────────────────────────────────────────────────────────
   if (!current) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="text-slate-400 text-base animate-pulse">Calculating results…</div>
+      <div className="min-h-[100dvh] w-full bg-slate-50 flex items-center justify-center">
+        <div className="text-slate-500 text-base animate-pulse">Calculating results…</div>
       </div>
     );
   }
@@ -209,15 +210,15 @@ const QuizPage = ({ onFinish, level = 1 }) => {
   const total = totalOriginalRef.current;
   const cardBorder =
     feedback === 'correct' ? 'border-emerald-500/50' :
-    feedback === 'wrong'   ? 'border-red-500/50'     : 'border-slate-800';
+    feedback === 'wrong'   ? 'border-red-500/50'     : 'border-slate-200';
   const inputBorder =
     disabled
-      ? feedback === 'correct' ? 'border-emerald-500 bg-emerald-950/30' : 'border-red-500 bg-red-950/30'
-      : 'border-slate-700 focus:border-indigo-500';
+      ? feedback === 'correct' ? 'border-emerald-500 bg-emerald-50' : 'border-red-500 bg-red-50'
+      : 'border-slate-300 focus:border-blue-500 shadow-sm';
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-3 sm:p-4">
-      <div className="w-full max-w-md animate-fade-in">
+    <div className="min-h-[100dvh] w-full bg-slate-50 flex items-center justify-center p-3 sm:p-6">
+      <div className="w-full max-w-lg animate-fade-in">
 
         {/* Progress */}
         <div className="mb-4 sm:mb-6">
@@ -228,26 +229,22 @@ const QuizPage = ({ onFinish, level = 1 }) => {
             wrong={wrongCount}
           />
           <div className="flex justify-end mt-1.5">
-            <span className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${
-              level === 2
-                ? 'text-violet-400 bg-violet-950/40 border-violet-800/40'
-                : 'text-indigo-400 bg-indigo-950/40 border-indigo-800/40'
-            }`}>
+            <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border text-slate-600 bg-white border-slate-200 shadow-sm">
               {level === 2 ? '⚡ Level 2 · ×10–20' : '✦ Level 1 · ×1–10'}
             </span>
           </div>
         </div>
 
         {/* Question card */}
-        <div className={`bg-slate-900 border ${cardBorder} rounded-2xl p-4 sm:p-8 shadow-2xl transition-colors duration-500`}>
+        <div className={`bg-white border ${cardBorder} rounded-2xl p-4 sm:p-8 shadow-xl transition-colors duration-500`}>
 
           {/* Retry badge */}
           {current.isRetry && (
             <div className="flex justify-center mb-3 sm:mb-4">
-              <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full border ${
+              <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full border shadow-sm ${
                 current.retriesLeft === 0
-                  ? 'bg-red-900/40 text-red-400 border-red-700/40'
-                  : 'bg-amber-900/40 text-amber-400 border-amber-700/40'
+                  ? 'bg-red-50 text-red-600 border-red-200'
+                  : 'bg-amber-50 text-amber-600 border-amber-200'
               }`}>
                 🔄 Retry
                 {current.retriesLeft === 0
@@ -269,11 +266,11 @@ const QuizPage = ({ onFinish, level = 1 }) => {
               <div className="text-slate-500 text-xs font-medium mb-2 tracking-wide uppercase">
                 What is
               </div>
-              <div className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-none">
+              <div className="text-5xl sm:text-6xl font-black text-slate-900 tracking-tight leading-none py-2">
                 {current.table}
-                <span className="text-indigo-400 mx-2">×</span>
+                <span className="text-blue-500 mx-2">×</span>
                 {current.multiple}
-                <span className="text-slate-600 ml-2 text-3xl sm:text-4xl">= ?</span>
+                <span className="text-slate-400 ml-2 text-4xl sm:text-5xl">= ?</span>
               </div>
             </div>
           </div>
@@ -289,13 +286,13 @@ const QuizPage = ({ onFinish, level = 1 }) => {
             onKeyDown={handleKeyDown}
             disabled={disabled}
             placeholder="Your answer…"
-            className={`w-full text-center text-2xl sm:text-3xl font-black rounded-xl px-4 py-3 sm:py-4 mb-3 sm:mb-4 outline-none border-2 transition-all duration-200 bg-slate-800 text-white placeholder-slate-600 ${inputBorder}`}
+            className={`w-full text-center text-3xl sm:text-4xl font-black rounded-xl px-4 py-4 sm:py-5 mb-3 sm:mb-4 outline-none border-2 transition-all duration-200 bg-slate-50 text-slate-900 placeholder-slate-300 ${inputBorder}`}
           />
 
           {/* Feedback */}
           {feedback && (
             <div className={`text-center text-sm font-semibold py-2 mb-3 sm:mb-4 rounded-lg ${
-              feedback === 'correct' ? 'text-emerald-400 bg-emerald-950/40' : 'text-red-400 bg-red-950/40'
+              feedback === 'correct' ? 'text-emerald-700 bg-emerald-100' : 'text-red-700 bg-red-100'
             }`}>
               {feedback === 'correct' ? '✓ Correct!' : `✗ Correct answer: ${current.answer}`}
             </div>
@@ -306,12 +303,12 @@ const QuizPage = ({ onFinish, level = 1 }) => {
             id="btn-submit"
             onClick={handleSubmit}
             disabled={disabled || userAnswer === ''}
-            className="w-full py-4 rounded-xl font-bold text-base tracking-wide transition-all duration-200 bg-indigo-600 hover:bg-indigo-500 text-white disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.97] shadow-lg shadow-indigo-900/40"
+            className="w-full py-4 sm:py-5 rounded-xl font-bold text-base sm:text-lg tracking-wide transition-all duration-200 bg-blue-600 hover:bg-blue-500 text-white disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.98] shadow-md"
           >
             Submit Answer
           </button>
-          <p className="text-center text-xs text-slate-600 mt-2 hidden sm:block">
-            Press <kbd className="bg-slate-700 rounded px-1 py-0.5 text-slate-400">Enter</kbd> to submit
+          <p className="text-center text-xs text-slate-500 mt-2 hidden sm:block">
+            Press <kbd className="bg-slate-100 border border-slate-200 rounded px-1.5 py-0.5 text-slate-600">Enter</kbd> to submit
           </p>
         </div>
 

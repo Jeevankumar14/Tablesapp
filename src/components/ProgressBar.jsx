@@ -14,20 +14,20 @@ const ProgressBar = ({ current, total, correct, wrong }) => {
     <div className="w-full">
       {/* Stats row */}
       <div className="flex justify-between items-center mb-2 text-xs font-medium">
-        <span className="text-slate-400">
-          Q <span className="text-white font-bold">{current}</span>
+        <span className="text-slate-500">
+          Q <span className="text-slate-900 font-bold">{current}</span>
           <span className="hidden sm:inline"> of</span>
           <span className="sm:hidden">/</span>
           {total}
         </span>
         <div className="flex gap-3 sm:gap-4">
-          <span className="text-emerald-400">✓ {correct}</span>
-          <span className="text-red-400">✗ {wrong}</span>
+          <span className="text-emerald-600">✓ {correct}</span>
+          <span className="text-red-600">✗ {wrong}</span>
         </div>
       </div>
 
       {/* Track */}
-      <div className="w-full h-2.5 bg-slate-700 rounded-full overflow-hidden">
+      <div className="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
         <div
           className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 transition-all duration-500 ease-out"
           style={{ width: `${pct}%` }}
