@@ -284,7 +284,7 @@ const QuizPage = ({ onFinish, level = 1 }) => {
             value={userAnswer}
             onChange={e => setUserAnswer(e.target.value)}
             onKeyDown={handleKeyDown}
-            disabled={disabled}
+            readOnly={disabled}
             placeholder="Your answer…"
             className={`w-full text-center text-3xl sm:text-4xl font-black rounded-xl px-4 py-4 sm:py-5 mb-3 sm:mb-4 outline-none border-2 transition-all duration-200 bg-slate-50 text-slate-900 placeholder-slate-300 ${inputBorder}`}
           />
