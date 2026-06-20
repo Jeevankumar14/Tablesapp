@@ -29,7 +29,7 @@ const ResultPage = ({ result, onRestart, onHome }) => {
           <div className={`text-base sm:text-lg font-semibold ${grade.color} mb-1`}>{grade.label}</div>
           <div className="text-slate-400 text-xs sm:text-sm mb-2">Quiz complete · {total} questions</div>
           <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full border text-slate-600 bg-white border-slate-200">
-            {level === 2 ? '⚡ Level 2 · ×10–20' : '✦ Level 1 · ×1–10'}
+            {level === 3 ? '🚀 Advanced · ×1–10' : level === 2 ? '⚡ Level 2 · ×10–20' : '✦ Level 1 · ×1–10'}
           </span>
         </div>
 
