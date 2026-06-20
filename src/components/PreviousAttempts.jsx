@@ -33,7 +33,7 @@ const PreviousAttempts = ({ history, onClear }) => {
           const isOpen     = expanded === idx;
           const wrongQs    = entry.wrongQuestions ?? [];
           const hasDetails = wrongQs.length > 0;
-          const levelLabel = entry.level === 2 ? 'L2' : 'L1';
+          const levelLabel = entry.level === 3 ? 'ADV' : entry.level === 2 ? 'L2' : 'L1';
 
           return (
             <div key={entry.timestamp ?? idx} className="rounded-xl overflow-hidden">

@@ -11,7 +11,7 @@ import { saveAttempt } from './utils/storage';
 const App = () => {
   const [view, setView]     = useState('home');
   const [result, setResult] = useState(null);
-  const [level, setLevel]   = useState(1);         // 1 or 2
+  const [level, setLevel]   = useState(1);         // 1, 2, or 3 (Advanced)
   const [quizKey, setQuizKey] = useState(0);
 
   /** Called by QuizPage when all questions are exhausted */
@@ -44,5 +44,9 @@ const App = () => {
     </>
   );
 };
+
+
+
+
 
 export default App;

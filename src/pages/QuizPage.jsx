@@ -230,7 +230,7 @@ const QuizPage = ({ onFinish, level = 1 }) => {
           />
           <div className="flex justify-end mt-1.5">
             <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border text-slate-600 bg-white border-slate-200 shadow-sm">
-              {level === 2 ? '⚡ Level 2 · ×10–20' : '✦ Level 1 · ×1–10'}
+              {level === 3 ? '🚀 Advanced · ×1–10' : level === 2 ? '⚡ Level 2 · ×10–20' : '✦ Level 1 · ×1–10'}
             </span>
           </div>
         </div>

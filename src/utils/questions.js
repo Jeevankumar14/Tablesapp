@@ -3,14 +3,28 @@
  */
 
 /**
- * Generate all 80 original questions.
- * @param {1|2} level  - 1 → multiples 1–10, 2 → multiples 10–20
+ * Generate all original questions for the chosen level.
+ * @param {1|2|3} level  - 1 → tables 12–19, multiples 1–10
+ *                          2 → tables 12–19, multiples 10–20
+ *                          3 → tables 20–30, multiples 1–10  (Advanced)
  */
 export const generateQuestions = (level = 1) => {
-  const multipleStart = level === 2 ? 10 : 1;
-  const multipleEnd   = level === 2 ? 20 : 10;
+  let tableStart, tableEnd, multipleStart, multipleEnd;
+
+  if (level === 3) {
+    tableStart    = 20;
+    tableEnd      = 30;
+    multipleStart = 1;
+    multipleEnd   = 10;
+  } else {
+    tableStart    = 12;
+    tableEnd      = 19;
+    multipleStart = level === 2 ? 10 : 1;
+    multipleEnd   = level === 2 ? 20 : 10;
+  }
+
   const questions = [];
-  for (let table = 12; table <= 19; table++) {
+  for (let table = tableStart; table <= tableEnd; table++) {
     for (let multiple = multipleStart; multiple <= multipleEnd; multiple++) {
       questions.push({
         id: `${table}x${multiple}`,

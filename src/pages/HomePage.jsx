@@ -27,6 +27,13 @@ const HomePage = ({ onStart }) => {
     lastScore >= 90 ? 'text-emerald-400' :
     lastScore >= 70 ? 'text-amber-400' : 'text-red-400';
 
+  const levelBtnClass = (lvl) =>
+    `py-3 sm:py-4 rounded-xl font-bold text-sm tracking-wide border-2 transition-all duration-200 ${
+      selectedLevel === lvl
+        ? 'bg-blue-600 border-blue-600 text-white shadow-md'
+        : 'bg-white border-slate-200 text-slate-600 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700'
+    }`;
+
   return (
     <div className="min-h-[100dvh] w-full bg-slate-50 flex items-center justify-center p-3 sm:p-6">
       <div className="w-full max-w-xl animate-fade-in">
@@ -47,7 +54,7 @@ const HomePage = ({ onStart }) => {
             Math<span className="text-blue-600">Trainer</span>
           </h1>
           <p className="text-slate-500 text-xs sm:text-sm mb-4 sm:mb-6">
-            Master tables 12 – 19 · 80 questions · 6 seconds each
+            Master multiplication tables · Timed questions · 6 seconds each
           </p>
 
           {/* Stats strip */}
@@ -71,15 +78,16 @@ const HomePage = ({ onStart }) => {
             <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest mb-2 text-center">
               Select Level
             </p>
-            <div className="grid grid-cols-2 gap-2 sm:gap-4">
+
+            {/* Tables 12–19 heading */}
+            <p className="text-[10px] font-semibold text-blue-500 uppercase tracking-wider mb-1.5 text-left">
+              Tables 12 – 19
+            </p>
+            <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-3">
               <button
                 id="btn-level-1"
                 onClick={() => setSelectedLevel(1)}
-                className={`py-3 sm:py-4 rounded-xl font-bold text-sm tracking-wide border-2 transition-all duration-200 ${
-                  selectedLevel === 1
-                    ? 'bg-blue-600 border-blue-600 text-white shadow-md'
-                    : 'bg-white border-slate-200 text-slate-600 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700'
-                }`}
+                className={levelBtnClass(1)}
               >
                 Level 1
                 <span className="block text-[11px] font-normal opacity-80 mt-0.5">Multiples 1 – 10</span>
@@ -87,16 +95,25 @@ const HomePage = ({ onStart }) => {
               <button
                 id="btn-level-2"
                 onClick={() => setSelectedLevel(2)}
-                className={`py-3 sm:py-4 rounded-xl font-bold text-sm tracking-wide border-2 transition-all duration-200 ${
-                  selectedLevel === 2
-                    ? 'bg-blue-600 border-blue-600 text-white shadow-md'
-                    : 'bg-white border-slate-200 text-slate-600 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700'
-                }`}
+                className={levelBtnClass(2)}
               >
                 Level 2
                 <span className="block text-[11px] font-normal opacity-80 mt-0.5">Multiples 10 – 20</span>
               </button>
             </div>
+
+            {/* Tables 20–30 heading */}
+            <p className="text-[10px] font-semibold text-purple-500 uppercase tracking-wider mb-1.5 text-left">
+              Tables 20 – 30
+            </p>
+            <button
+              id="btn-level-3"
+              onClick={() => setSelectedLevel(3)}
+              className={`w-full ${levelBtnClass(3)}`}
+            >
+              Advanced
+              <span className="block text-[11px] font-normal opacity-80 mt-0.5">Multiples 1 – 10</span>
+            </button>
           </div>
 
           {/* Start */}
@@ -118,7 +135,7 @@ const HomePage = ({ onStart }) => {
         </div>
 
         <div className="mt-3 text-center text-[11px] text-slate-600 space-y-0.5">
-          <p>Tables 12–19 · Wrong answers retry up to 3×</p>
+          <p>Tables 12–19 & 20–30 · Wrong answers retry up to 3×</p>
           <p>All data saved locally · No login needed</p>
         </div>
       </div>
